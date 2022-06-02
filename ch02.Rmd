@@ -21,29 +21,34 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Ch01では以下の教訓があったが、これを教科書(p.10)に沿った言い方に変えると...
 
-> *母集団*の性質（*母平均*、*母分散*）を*標本*から*推定*(統計の三大目的)したい
+> **母集団**の性質（**母平均**、**母分散**）を**標本**から**推定**
+> (統計の三大目的)したい
 
-となる。*イタリック*の用語は抑えておきましょう。これらの推定ができると
+となる。**太字**の用語は抑えておきましょう。これらの推定ができると
 本当のデータを取得できない現実での議論を進められる、ということになります。
 その際、標本(サンプル)の取得方法に関して
-*ランダムサンプリング*と*トレードオフ*の話もしてくれています。
+**ランダムサンプリング**と**トレードオフ**の話もしてくれています。
 
-なお、平均を $\mu$、分散を $\sigma^2$ と表記します。
+なお、母集団と標本の性質を分けてか表記したいとき、
+母平均を$\mu$、母分散を $\sigma^2$ と表記します。
+対して標本(母集団の性質を推定するためのデータ)
+の標本平均を $\bar{X}$、標本分散 を $s^2$ と表記します。
 
 ## 2.2 標本の性質
 
-You can include R code in the document as follows:
-
-```{r cars}
-summary(cars)
+```{r}
+# https://whatalnk.github.io/stat-intro-by-r-tkd/Chap02.html
+A <- c(3, 4, 4, 5, 5, 5, 5, 6, 6, 7)
+B <- c(1, 2, 4, 4, 5, 5, 5, 6, 8, 10)
+df1 <- data.frame(values = c(A, B), label=c(rep("SampleA", 10), rep("SampleB", 10)))
+head(df1)
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r}
+library(ggplot2)
+ggplot(df1) +
+  facet_wrap(.~label) +
+  geom_histogram(aes(x=values))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
