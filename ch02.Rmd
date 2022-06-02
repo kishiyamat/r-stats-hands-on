@@ -96,10 +96,14 @@ ggplot(df2) +
 
 平均値を $\bar{X}=1/n = \Sigma_{i=1}^{n}X_i$ としています。
 人によてはRのコードで見たほうが理解しやすいかもしれません。
-データフレームから行を抜き出して `X_A` としてみましょう。
+`X_A_bar`($\bar{X}_A$) は以下のように求められます。
 
 ```{r}
-X_A = df2[df2$labels=="SchoolA",]$values
+# ベクトルに対して一度に真偽値を求められる
+print(df2$labels=="SchoolA")
+# [行,列]を真偽値で指定できる。
+print(df2[df2$labels=="SchoolA",])
+X_A = df2[df2$labels=="SchoolA", "values"]
 X_A_bar = sum(X_A)/length(X_A)
 X_A_bar
 ```
@@ -110,6 +114,34 @@ X_A_bar
 # X_B_bar
 ```
 
+その他、中央値や最頻値もありますが統計ではあまり使いません。
+Rなら箱ひげ図も簡単に描けます。
 
+```{r}
+ggplot(df2) +
+  geom_boxplot(aes(x = labels, y=values))
+```
 
 ### 2.2.2 ばらつきを表す指標
+
+標本分散は小さい方向へ偏るので、
+1/n ではなく 1/(n-1) をかけて偏りをなくす
+（より大きい、偏るのない「不偏」な分散とする）
+コラム2.3を参照したい。
+
+```{r}
+X_A = df1[df1$labels=="SampleA", "values"]
+n = length(X_A)
+# 偏差和
+sum(X_A - mean(X_A))  # ほぼ0
+# 平方和(ただし、データの数だけ増えるし、単位が面積になっている)
+sum((X_A - mean(X_A))^2)  # 式(2.2)
+# 標本分散(まだ単位は面積)
+sum((X_A - mean(X_A))^2)/(n-1)
+# 標準偏差(平均的なばらつき)
+sqrt(sum((X_A - mean(X_A))^2)/(n-1))
+sd(X_A) == sqrt(sum((X_A - mean(X_A))^2)/(n-1))  # Rのsdはn-1バージョン
+```
+
+このsdの値は色々なところに使える。値が正規分布に従うとき、
++-2sdは95%になる。
