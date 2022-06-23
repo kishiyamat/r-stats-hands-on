@@ -1,0 +1,21 @@
+---
+title: ""
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!--
+目的
+- 
+- 
+- 
+-->
+
+## 演習問題
+
+## 演習問題
+
+R初出
