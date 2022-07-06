@@ -1,6 +1,14 @@
 [![Binder](https://binder.cs.rcos.nii.ac.jp/badge_logo.svg)](https://binder.cs.rcos.nii.ac.jp/v2/gh/kishiyamat/r-stats-hands-on/HEAD)
 
-# 受講者ガイド(環境構築)
+# 受講者ガイド
+
+目標
+
+- 仮説検証に使う統計のX,Y,Zを理解する
+- 手法と、Rに慣れる
+- 統計手法を考慮して実験の設計ができる
+
+## 環境構築
 
 このページは、授業・セミナー等でNIIのオンライン分析システムを利用する学生・受講者の方向けの情報を
 まとめています。
@@ -26,12 +34,19 @@ OpenIdP のアカウントが必要です。講師の指示に従って適切な
 自分用の分析環境が新たに作られます。
 Files の右側にある New → RStudio をクリックします。RStudio が新しいタブで開きます。
 
+## 進め方
+
+このチュートリアルでは
+[Rで学ぶ統計学入門 - 株式会社東京化学同人](http://www.tkd-pbl.com/book/b279683.html)
+の内容を進めます。本文の内容を新しくスライドに起こす、ということはせず、
+学習の助けになるデータを追加する程度です。第一章の内容は `ch01.Rmd` に
+載せており、続く章も同様です。
+基本的には議論をしたり、手を動かしたりしながら
+進めていく形式を想定しています。
+
 # r-stats-hands-on
 
 - [Rで学ぶ統計学入門 - 株式会社東京化学同人](http://www.tkd-pbl.com/book/b279683.html) を利用して統計のチュートリアル
 - [オンライン分析システム（実証実験）](https://meatwiki.nii.ac.jp/confluence/pages/viewpage.action?pageId=48137275)
 - [Zero-to-Binder](https://the-turing-way.netlify.app/communication/binder/zero-to-binder.html)
     - Helps you create a Binder project from scratch.
-
-
-https://binder.cs.rcos.nii.ac.jp/v2/gh/kishiyamat/r-stats-hands-on/HEAD
