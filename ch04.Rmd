@@ -1,0 +1,21 @@
+---
+title: "推定と誤差"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!--
+目的
+- 
+- 
+- 
+-->
+
+## 演習問題
+
+## 演習問題
+
+R初出
