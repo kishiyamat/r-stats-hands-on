@@ -1,6 +1,6 @@
 ---
-title: ""
-output: github_document
+title: "多言配置の分散分析と交互作用"
+output: ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}

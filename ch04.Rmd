@@ -1,6 +1,6 @@
 ---
-title: ""
-output: github_document
+title: "推定と誤差"
+output: ioslides_presentation
 ---
 
 ```{r setup, include=FALSE}
