@@ -84,9 +84,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Rのセットアップ
 
-* https://binder.cs.rcos.nii.ac.jp/v2/gh/kishiyamat/r-stats-hands-on/main にアクセス
-* NIIのウェブページで所属機関を[選択]し、ご自身の所属機関で認証(自分用の分析環境が新たに作られます)
-* Files の右側にある New → RStudio をクリック(RStudio が新しいタブで開きます)
+1. https://binder.cs.rcos.nii.ac.jp/v2/gh/kishiyamat/r-stats-hands-on/main にアクセス
+1. NIIのウェブページで所属機関を[選択]し、ご自身の所属機関で認証(自分用の分析環境が新たに作られます)
+1. Files の右側にある New → RStudio をクリック(RStudio が新しいタブで開きます)
 
 ## Ch01.md の目標ふりかえり
 
@@ -122,8 +122,8 @@ p.13以降は徐々に数式が増えていくのでRのコードで補足.
 # <- で変数に10の数値を代入、cはconcatenateのc
 A <- c(3, 4, 4, 5, 5, 5, 5, 6, 6, 7)
 B <- c(1, 2, 4, 4, 5, 5, 5, 6, 8, 10)
-# repはrepeat
-# 問: rep("SampleA", 10) の意味は...?
+# repはrepeat 例. rep("SampleA", 10)
+# データフレーム: エクセルのようなもの. 列に要因、行に観測を持つ
 df1 <- data.frame(
   values = c(A, B),
   labels = c(rep("SampleA", 10), rep("SampleB", 10))
@@ -155,6 +155,8 @@ ggplot(df1) +
 
 ## 2.2 標本の性質
 
+p.14以降の準備
+
 ```{r}
 # https://whatalnk.github.io/stat-intro-by-r-tkd/Chap02.html
 A <- c(
@@ -169,6 +171,8 @@ A <- c(
 ```
 
 ## 2.2 標本の性質
+
+p.14以降の準備
 
 ```{r}
 # https://whatalnk.github.io/stat-intro-by-r-tkd/Chap02.html
@@ -186,6 +190,7 @@ B <- c(
 ## 2.2 標本の性質
 
 ```{r echo=TRUE, message=FALSE, warning=FALSE, fig.height=3}
+# データフレーム(p.14)
 df2 <- data.frame(
   values = c(A, B),
   labels = c(rep("SchoolA", length(A)), rep("SchoolB", length(B)))
@@ -280,5 +285,27 @@ sd(X_A) == sqrt(sum((X_A - mean(X_A))^2)/(n-1))  # Rのsdはn-1バージョン
 ちゃんともとのグラフのばらつき具合を反映できていることを確認する
 
 ## 2.3 演習問題
+
+R初出
+
+---
+title: "大数の法則、正規分布、中心極限定理"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<!--
+目的
+- 
+- 
+- 
+-->
+
+## 演習問題
+
+## 演習問題
 
 R初出

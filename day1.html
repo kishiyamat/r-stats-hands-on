@@ -3301,11 +3301,11 @@ slide:not(.current) .plotly.html-widget{
 
 </article></slide><slide class=""><hgroup><h2>Rのセットアップ</h2></hgroup><article  id="rのセットアップ">
 
-<ul>
+<ol>
 <li><a href='https://binder.cs.rcos.nii.ac.jp/v2/gh/kishiyamat/r-stats-hands-on/main' title=''>https://binder.cs.rcos.nii.ac.jp/v2/gh/kishiyamat/r-stats-hands-on/main</a> にアクセス</li>
 <li>NIIのウェブページで所属機関を[選択]し、ご自身の所属機関で認証(自分用の分析環境が新たに作られます)</li>
 <li>Files の右側にある New → RStudio をクリック(RStudio が新しいタブで開きます)</li>
-</ul>
+</ol>
 
 </article></slide><slide class=""><hgroup><h2>Ch01.md の目標ふりかえり</h2></hgroup><article  id="ch01.md-の目標ふりかえり">
 
@@ -3352,8 +3352,8 @@ slide:not(.current) .plotly.html-widget{
 # &lt;- で変数に10の数値を代入、cはconcatenateのc
 A &lt;- c(3, 4, 4, 5, 5, 5, 5, 6, 6, 7)
 B &lt;- c(1, 2, 4, 4, 5, 5, 5, 6, 8, 10)
-# repはrepeat
-# 問: rep(&quot;SampleA&quot;, 10) の意味は...?
+# repはrepeat 例. rep(&quot;SampleA&quot;, 10)
+# データフレーム: エクセルのようなもの. 列に要因、行に観測を持つ
 df1 &lt;- data.frame(
   values = c(A, B),
   labels = c(rep(&quot;SampleA&quot;, 10), rep(&quot;SampleB&quot;, 10))
@@ -3389,6 +3389,8 @@ ggplot(df1) +
 
 </article></slide><slide class=""><hgroup><h2>2.2 標本の性質</h2></hgroup><article  id="標本の性質-3">
 
+<p>p.14以降の準備</p>
+
 <pre class = 'prettyprint lang-r'># https://whatalnk.github.io/stat-intro-by-r-tkd/Chap02.html
 A &lt;- c(
   43.3, 43.1, 42.6, 42.4, 42.2, 41.8, 41.7, 41.6, 41.5, 41.4,
@@ -3401,6 +3403,8 @@ A &lt;- c(
 )</pre>
 
 </article></slide><slide class=""><hgroup><h2>2.2 標本の性質</h2></hgroup><article  id="標本の性質-4">
+
+<p>p.14以降の準備</p>
 
 <pre class = 'prettyprint lang-r'># https://whatalnk.github.io/stat-intro-by-r-tkd/Chap02.html
 B &lt;- c(
@@ -3415,7 +3419,8 @@ B &lt;- c(
 
 </article></slide><slide class=""><hgroup><h2>2.2 標本の性質</h2></hgroup><article  id="標本の性質-5">
 
-<pre class = 'prettyprint lang-r'>df2 &lt;- data.frame(
+<pre class = 'prettyprint lang-r'># データフレーム(p.14)
+df2 &lt;- data.frame(
   values = c(A, B),
   labels = c(rep(&quot;SchoolA&quot;, length(A)), rep(&quot;SchoolB&quot;, length(B)))
 )
