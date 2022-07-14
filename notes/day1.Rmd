@@ -284,6 +284,8 @@ sd(X_A) == sqrt(sum((X_A - mean(X_A))^2)/(n-1))  # Rのsdはn-1バージョン
 
 ちゃんともとのグラフのばらつき具合を反映できていることを確認する
 
+## 演習問題
+
 ## 2.3 演習問題
 
 R初出
@@ -303,6 +305,18 @@ knitr::opts_chunk$set(echo = TRUE)
 - 
 - 
 -->
+
+## 演習問題
+
+
+---
+title: "推定と誤差"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 ## 演習問題
 
