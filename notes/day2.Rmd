@@ -1,0 +1,18 @@
+---
+title: "Day2"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# 『Rで学ぶ統計学入門』勉強会
+
+## 前回の復習
+
+
+# ２標本の平均値間の有意差検定: t検定
+# 一元配置の分散分析と多重比較
+# 多言配置の分散分析と交互作用
+# 相関
