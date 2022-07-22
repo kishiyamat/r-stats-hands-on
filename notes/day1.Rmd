@@ -9,6 +9,9 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(ggplot2)
+library(readr)
+library(dplyr)
 ```
 
 # 『Rで学ぶ統計学入門』勉強会
@@ -360,7 +363,6 @@ t検定も線形モデルの枠組みで考えられることを補足
 説明のため、データの形式を以下のように変更します。
 
 ```{r}
-library(ggplot2)
 data_c <- data.frame(
   sex = c(rep(1, 15), rep(0, 15)),
   height = c(data_b$m, data_b$f)
@@ -508,7 +510,6 @@ t値とは違い、大きいほど確率が下がる。
 読み込んだデータは「湖によってストロンチウムの量は異なるか」というものになる。
 
 ```{r}
-library(tidyverse)
 d2 <- readr::read_csv("../data/table6-3.csv")
 d2
 ```
