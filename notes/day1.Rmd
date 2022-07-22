@@ -89,7 +89,7 @@ Rの実行
 a <- 10
 # 式をConsoleにコピペするもよし、右上の緑▶を押すもよし、
 # Macは⌘エンター、WindowsはCtrlエンターもよし
-x <- (5+3)*2-a/5
+x <- (5 + 3) * 2 - a / 5
 # Environment で値をチェックできる
 ```
 
@@ -180,8 +180,8 @@ Day2
 ```{r}
 # 教科書p.48の(a): 小学校aの男女の身長
 data_a <- data.frame(
-    m = c(143.1, 140.9, 147.2, 139.8, 141.3, 150.7, 149.4, 145.6, 146.5, 148.5, 141.2, 136.5, 145.8, 148.1, 144.3), 
-    f = c(138.7, 142.8, 150.3, 148.4, 141.7, 149.5, 156.5, 144.6, 144.4, 145.7, 148.3, 140.8, 146.2, 149.9, 144.1)
+  m = c(143.1, 140.9, 147.2, 139.8, 141.3, 150.7, 149.4, 145.6, 146.5, 148.5, 141.2, 136.5, 145.8, 148.1, 144.3),
+  f = c(138.7, 142.8, 150.3, 148.4, 141.7, 149.5, 156.5, 144.6, 144.4, 145.7, 148.3, 140.8, 146.2, 149.9, 144.1)
 )
 head(data_a)
 ```
@@ -196,7 +196,7 @@ summary(data_a)
 
 ```{r}
 # 平均の差
-abs(144.6-146.1)
+abs(144.6 - 146.1)
 # 列は$で参照できる
 sd(data_a$m)
 sd(data_a$f)
@@ -209,8 +209,8 @@ sdは男女それぞれ1.4と1.8です。
 ```{r}
 # 教科書p.48の(b) 小学校bの男女の身長
 data_b <- data.frame(
-    m = c(142.3, 142.5, 145.7, 143.5, 144.2, 145.1, 145.9, 145.2, 146.8, 145.7, 145.4, 144.6, 144.2, 145.9, 142.1),
-    f = c(143.5, 144.6, 143.4, 146.6, 145.3, 147.7, 147.2, 147.8, 145.3, 145.7, 147.5, 147.2, 148.8, 147.9, 143.3)
+  m = c(142.3, 142.5, 145.7, 143.5, 144.2, 145.1, 145.9, 145.2, 146.8, 145.7, 145.4, 144.6, 144.2, 145.9, 142.1),
+  f = c(143.5, 144.6, 143.4, 146.6, 145.3, 147.7, 147.2, 147.8, 145.3, 145.7, 147.5, 147.2, 148.8, 147.9, 143.3)
 )
 head(data_b)
 summary(data_b)
@@ -258,8 +258,8 @@ sd(data_b$f)
 
 ```{r}
 # 自由度8のt分布の見た目
-t = seq(-3, 3, 0.1)
-plot(t, dt(t, df=8))
+t <- seq(-3, 3, 0.1)
+plot(t, dt(t, df = 8))
 ```
 
 別のケース
@@ -297,7 +297,7 @@ Type1-Error はおきづらくなる(5章参照)。
 
 ```{r}
 head(data_a)
-t.test(data_a$m, data_a$f, var=T)
+t.test(data_a$m, data_a$f, var = T)
 ```
 
 data_aでは差が偶然である確率が0.3345なので、
@@ -317,7 +317,7 @@ $$
 同時に、p値は小さくなっている。
 
 ```{r}
-t.test(data_b$m, data_b$f, var=T)
+t.test(data_b$m, data_b$f, var = T)
 ```
 
 $p$が$\alpha$より小さいので、データ(b)からは帰無仮説を棄却できる。
@@ -361,12 +361,14 @@ t検定も線形モデルの枠組みで考えられることを補足
 
 ```{r}
 library(ggplot2)
-data_c <- data.frame(sex=c(rep(1, 15), rep(0, 15)),
-            height=c(data_b$m, data_b$f))
+data_c <- data.frame(
+  sex = c(rep(1, 15), rep(0, 15)),
+  height = c(data_b$m, data_b$f)
+)
 data_c
 
 # 図示
-ggplot(data_c, aes(x=as.factor(sex), y=height)) +
+ggplot(data_c, aes(x = as.factor(sex), y = height)) +
   geom_boxplot()
 ```
 
@@ -378,9 +380,9 @@ ggplot(data_c, aes(x=as.factor(sex), y=height)) +
 
 ```{r}
 # モデル
-summary(lm(height~sex, data=data_c))
+summary(lm(height ~ sex, data = data_c))
 s_delta <- 0.5998
-summary(lm(height/s_delta~sex, data_c))
+summary(lm(height / s_delta ~ sex, data_c))
 ```
 
 そうすると、Estimateが-1.51, sdが0.59,
@@ -389,7 +391,7 @@ tが-2.52(と、それに伴うp値)が一致しました。
 
 ```{r}
 # 結果は線形モデルと一致する
-t.test(data_b$m, data_b$f, var=T)
+t.test(data_b$m, data_b$f, var = T)
 ```
 
 t検定にはいくつも制限があります。
@@ -459,17 +461,20 @@ F値は(グループ間のばらつき/グループ内のばらつき)と定義�
 `SS_within_group`(グループ内のばらつき) を動かしてみましょう。
 
 ```{r}
-SS_between_group = 2  # グループ間のばらつき
-SS_within_group = 1  # グループ内のばらつき
-base = 15
-df_p72 = data.frame(
+SS_between_group <- 2 # グループ間のばらつき
+SS_within_group <- 1 # グループ内のばらつき
+base <- 15
+df_p72 <- data.frame(
   idx = 1:18,
-  grp = c(rep(1,6), rep(2,6), rep(3,6)),
-  y = c( rnorm(6, base-SS_between_group, SS_within_group),
-         rnorm(6, base, SS_within_group),
-         rnorm(6, base+SS_between_group, SS_within_group) ))
+  grp = c(rep(1, 6), rep(2, 6), rep(3, 6)),
+  y = c(
+    rnorm(6, base - SS_between_group, SS_within_group),
+    rnorm(6, base, SS_within_group),
+    rnorm(6, base + SS_between_group, SS_within_group)
+  )
+)
 # df_p72 をプロット
-ggplot(df_p72, aes(x=idx, y=y, color=as.factor(grp))) +
+ggplot(df_p72, aes(x = idx, y = y, color = as.factor(grp))) +
   geom_point()
 ```
 
@@ -486,8 +491,8 @@ F分布は2つの自由度によって定義できる。
 -   サンプルの自由度(グループ内のサンプル数-1 \* グループ数)
 
 ```{r}
-f_values = seq(0, 5, 0.1)
-p = df(f_values, 3, 44)
+f_values <- seq(0, 5, 0.1)
+p <- df(f_values, 3, 44)
 plot(f_values, p, type = "l")
 ```
 
