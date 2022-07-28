@@ -112,7 +112,7 @@ summary(lm(height ~ sex, data = data_c))
 先程は右肩下がりでしたが、今回は右肩あがりなデータになっています。
 
 ```{r}
-ggplot(sleepstudy, aes(x=as.factor(Days), y=Reaction))+
+ggplot(sleepstudy, aes(x = as.factor(Days), y = Reaction)) +
   geom_boxplot()
 ```
 
@@ -121,13 +121,13 @@ ggplot(sleepstudy, aes(x=as.factor(Days), y=Reaction))+
 Xが0の時のYが切片になるので、切片は250くらいです。 そうすると、 y =
 10\*x + 250 という式が作れそうです。
 
-Rの `f = Reaction ~ Days` という式は  `f = Reaction ~ Days + 1` 
+Rの `f = Reaction ~ Days` という式は `f = Reaction ~ Days + 1`
 の略です。これを `lm`に与えると、Daysと1にかけてReactionとなるような値を
 推定してくれます。
 
 ```{r}
-f = Reaction ~ Days
-m = lm(f, sleepstudy)
+f <- Reaction ~ Days
+m <- lm(f, sleepstudy)
 summary(m)
 ```
 
@@ -137,8 +137,8 @@ summary(m)
 順当に反応時間が遅くなる人(308)もいそうです。傾きが違えば、線を引いた時の切片も違いそうです。
 
 ```{r}
-ggplot(sleepstudy, aes(x=as.factor(Days), y=Reaction))+
-  facet_wrap(.~Subject) +
+ggplot(sleepstudy, aes(x = as.factor(Days), y = Reaction)) +
+  facet_wrap(. ~ Subject) +
   geom_boxplot()
 ```
 
@@ -154,24 +154,24 @@ ggplot(sleepstudy, aes(x=as.factor(Days), y=Reaction))+
 
 $$
 y = (10.467+被験者308のランダム効果)*\rm{Days} + (251.405+被験者308のランダム切片)*1
-$$
-となります。さきほど、以下のような話をしました。
+$$ となります。さきほど、以下のような話をしました。
 
-> Rの `f = Reaction ~ Days` という式は  `f = Reaction ~ Days + 1` 
-> の略です。これを `lm`に与えると、Daysと1にかけてReactionとなるような値を
+> Rの `f = Reaction ~ Days` という式は `f = Reaction ~ Days + 1`
+> の略です。これを
+> `lm`に与えると、Daysと1にかけてReactionとなるような値を
 > 推定してくれます。
 
 つまり、`Reaction ~ Days` を与えると全体の傾きと切片をもとめてくれます。
 
-ここで次に `Reaction ~ Days+1 + (Days+1|Subject)` という式を考えてみます。
-これを `lmer` に与えると、
+ここで次に `Reaction ~ Days+1 + (Days+1|Subject)`
+という式を考えてみます。 これを `lmer` に与えると、
 被験者ごとの傾きと切片`(Days+1|Subject)`を考慮して
-全体の傾きと切片を求めてくれます。
-全体の傾きと切片は `summary` で確認できます。
+全体の傾きと切片を求めてくれます。 全体の傾きと切片は `summary`
+で確認できます。
 
 ```{r}
-f_lmer = Reaction ~ Days+1 + (Days+1|Subject)
-m = lmer(f_lmer, sleepstudy)
+f_lmer <- Reaction ~ Days + 1 + (Days + 1 | Subject)
+m <- lmer(f_lmer, sleepstudy)
 summary(m)
 ```
 
@@ -190,7 +190,7 @@ ranef(m)$Subject
 被験者番号308の方を見ると、以下のように効果が求まったと解釈できます。
 
 $$
-\rm{Reaction} = 10.467*\rm{Days} + 251.405*1 + (9.1989758*\rm{Days} + 2.2585509	*1)
+\rm{Reaction} = 10.467*\rm{Days} + 251.405*1 + (9.1989758*\rm{Days} + 2.2585509 *1)
 $$
 
 さらに式を変えると以下のように書き換えられます。
