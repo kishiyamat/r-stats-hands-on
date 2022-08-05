@@ -50,7 +50,7 @@ Day1
 
 Day2
 
--   GLM
+-   LME
 -   ランダム構造
 -   モデル選択
 
@@ -279,7 +279,7 @@ Day1
 
 Day2
 
--   GLM
+-   LME
 -   ランダム構造
 -   モデル選択
 
@@ -343,7 +343,7 @@ Day1
 
 Day2
 
--   GLM
+-   LME
 -   ランダム構造
 -   モデル選択
 
@@ -439,6 +439,7 @@ t値とは違い、大きいほど確率が下がる。
 読み込んだデータは「湖によってストロンチウムの量は異なるか」というものになる。
 
 ```{r}
+# Windowsで作ったデータだと読み込めないことがあるので注意
 d2 <- readr::read_csv("../data/table6-3.csv")
 d2
 ```
@@ -506,12 +507,9 @@ pairwise.t.test(d2$stron, d2$lake, p.adj = "holm")
 土壌の質 2. 肥料の有無 3. その両方 の効果」 を検証するデータ
 
 ```{r}
-# 読み込む段階で mutate を使って数値→要因に変換してあげると良い。
-d_soil <- readr::read_csv("../data/table7-2.csv") %>%
-  mutate(
-    soil = as.factor(soil),
-    ft = as.factor(ft)
-  )
+d_soil <- readr::read_csv("../data/table7-2.csv")
+# mutate を使って数値→要因に変換してあげると良い。
+d_soil <- mutate(d_soil, soil = as.factor(soil), ft = as.factor(ft))
 d_soil
 ```
 
@@ -580,13 +578,12 @@ ggplot(d_dupoux, aes(x = Duration, y = Percent, color = Language)) +
 
 Day1
 
--   R/RStudio
 -   t検定
 -   補足: t検定と線形モデル
 -   ANOVA
 
 **Day2**
 
--   GLM
+-   LME
 -   ランダム構造
 -   モデル選択
