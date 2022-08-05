@@ -315,8 +315,8 @@ ggplot(d_sone, aes(x = Noun, y = RT, color = Attachment)) +
 
 一旦、データを見てみましょう。
 データ事前に配布したファイルをread_csvで読み込みましょう。
-なお、encodeの話などは 
-https://oku.edu.mie-u.ac.jp/~okumura/stat/readr.html
+なお、encodeの話などは
+<https://oku.edu.mie-u.ac.jp/~okumura/stat/readr.html>
 が詳しいので、ご自身のデータで問題が起きたときはこちらをご参考ください。
 
 ```{r}
@@ -337,30 +337,35 @@ regs$clen <- scale(regs$nlen)	# Scale(convergeしやすくなる)
 regs$cat <-  scale(regs$nat) # Scale -1, 1
 head(regs)
 ```
+
 ```{r}
 ggplot(regs, aes(x = len, y = rt, color = at)) +
   geom_boxplot()
 ```
 
-これを先程のlmerを使ってモデリングしてみましょう。
-ランダム効果の部分は `+(1+clen*cat|subj) + (1+clen*cat|item)`となっている
+## モデル選択
+
+これを先程のlmerを使ってモデリングしてみましょう。 ランダム効果の部分は
+`+(1+clen*cat|subj) + (1+clen*cat|item)`となっている
 ことからわかるように、ランダム切片（被験者ごと、アイテムごとにどれくらい遅いか）
 だけでなく、ランダム傾きも入っています(`clen*cat`)。
 
 ```{r}
-rt.lme10 <- lmer(log(rt) ~ clen*cat + (1+clen*cat|subj) + (1+clen*cat|item), data=regs)
+rt.lme10 <- lmer(rt ~ clen*cat + (1+clen*cat|subj) + (1+clen*cat|item), data=regs)
 summary(rt.lme10)
 ```
 
-ここではVarianceの小さいものから削っていきます。
+ただ、同程度の良いモデルならよりシンプルなモデルのほうが良い、
+という原則に基づいて、ここからランダム構造を削っていきます。
+(複雑なモデルを作って削っていく方法を backward elimination といいます)
+
+以下ではVarianceの小さいものから削っていきます。
 subjの(Intercept)を見るとVarianceが大きな値になっています。
 これは、被験者ごとのベースとなる読み時間の差が大きいということです。
 ランダム効果の目的はこうしたばらつきの大きな差を固定効果から抜くことなので、
 こうしたVarianceの大きな効果は残しておきます。
 逆に、Varianceの小さなものはあってもなくても同じかもしれないので、
 試しに削っていく...ということを繰り返していきます。
-上では、itemの`clen*cat`が最も小さいVarianceなので、削って差をみてみます。
-その結果、差はないようなのでまた削っていきます。
 
 ```{r}
 # varianceの１番小さい要因をランダム効果から抜いていく
@@ -368,29 +373,47 @@ rt.lme9 <- lmer(rt ~ clen*cat + (1+clen*cat|subj) + (1+clen+cat|item), data=regs
 anova(rt.lme10, rt.lme9)
 ```
 
+上では、itemの`clen*cat`が最も小さいVarianceなので、削って差をみてみます。
+その結果、差はないようなのでまた削っていきます。 ここでの `anova` 関数は
+`?anova` をするとマニュアルが出てきますが、
+より複雑なモデルとの間でデータとのフィットの良さを比較してくれます。
+(詳しくは
+<https://bookdown.org/ndphillips/YaRrr/comparing-regression-models-with-anova.html>
+を参照)
+
+Varianceの小さいランダム構造を落としていってモデルを作成し、
+anovaに与えてみます。
 
 ```{r}
 # 省きますが、Varianceの小さいものから削っています。
 rt.lme8 <- lmer(rt ~ clen*cat + (1+clen+cat|subj) + (1+clen+cat|item), data=regs)
 rt.lme7 <- lmer(rt ~ clen*cat + (1+clen+cat|subj) + (1+clen|item), data=regs)
-rt.lme6 <- lmer(rt ~ clen*cat + (1+clen|subj) + (1+clen|item), data=regs)
+rt.lme6 <- lmer(rt ~ clen*cat + (1+clen|subj) + (1+clen|item), data=regs)  # Singularではいのはこれ
 rt.lme5 <- lmer(rt ~ clen*cat + (1+clen|subj) + (1|item), data=regs)
 rt.lme0 <- lmer(rt ~ clen*cat + (1|subj) + (1|item), data=regs)
 anova(rt.lme10, rt.lme9, rt.lme8, rt.lme7, rt.lme6, rt.lme5, rt.lme0)
 ```
 
+この結果の見方としては、6→7や8→9と複雑にしたときにフィットがよくなり、
+あるいは9→8、7→6と削った時にフィットが悪くなる、という結果に解釈できます。
+今回は backwardなので、9を採用します。
+
 ```{r}
-summary(lmer(rt ~ len*at + (1+len*at|subj) + (1+len*at|item), data=results_sone))
-# lmer(rt ~ clen*cat + (1|subj) + (1|item), data=results_sone)
+summary(rt.lme9)
 ```
-
-
-## モデル選択
-
-
-## まとめ
 
 ## 今回扱わなかった範囲
 
-- エンコーディング: モデリングの前に、要因を数字としてあげます。
-- GLMの理論: 
+-   エンコーディング: モデリングの前に、要因を数字としてあげます。
+    -   <https://phiz.c.u-tokyo.ac.jp/~hiroselab/stats/0907.html>
+    -   峰見さんの資料
+-   GLMの理論:
+    今回は従属変数は連続地でしたが、少しひねるとカテゴリカルな値も利用できます。
+    -   <https://kishiyamat.github.io/tutorial-lme-vwp/>
+    -   lmeと言いつつglmerを使っている岸山の資料
+
+## まとめ
+
+-   構造的なノイズとはなにか
+-   `lmer`による構造的なノイズのモデリング
+-   複雑すぎるモデルの改善
