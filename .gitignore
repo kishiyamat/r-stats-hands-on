@@ -4,3 +4,6 @@
 .Ruserdata
 .vscode/
 .DS_Store
+data/PL_LME.csv
+notes/PL_LME_exp 3.14latest.R
+
