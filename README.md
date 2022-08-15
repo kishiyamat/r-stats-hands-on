@@ -39,7 +39,7 @@ Day2
 以下の「ノート」と「Day1」、「Day2」はリンクが付いているので、クリックすると遷移します。
 
 1. Day0環境構築なので各自[ノート](https://github.com/kishiyamat/r-stats-hands-on/blob/main/notes/day0.md)を参考にしながら事前準備
-1. [Day1]と[Day2]は動画を見て学習
+1. [Day1](https://drive.google.com/file/d/13e8Q5TsYXYbDSVtw1h2MZJJ66tRu-MSc/view?usp=sharing)と[Day2]()は動画を見て学習
 
 ## 補足
 
