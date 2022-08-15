@@ -41,6 +41,8 @@ Day2
 1. Day0環境構築なので各自[ノート](https://github.com/kishiyamat/r-stats-hands-on/blob/main/notes/day0.md)を参考にしながら事前準備
 1. [Day1](https://drive.google.com/file/d/13e8Q5TsYXYbDSVtw1h2MZJJ66tRu-MSc/view?usp=sharing)と[Day2]()は動画を見て学習
 
+なお、Day2で使うデータはすでに配置済みですので、動画内での作業は不要です。
+
 ## 補足
 
 -   チュートリアルが終わり、環境を手元に作りたい方は[RStudioのドキュメント](https://www.rstudio.com/products/rstudio/download/)を参照すると良いと思います
